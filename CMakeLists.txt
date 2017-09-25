@@ -143,9 +143,9 @@ if (WITH_IIWA_DRIVER)
   set(IIWA_DRIVER_GIT_REPOSITORY
 	"git@github.com:RobotLocomotion/drake-iiwa-driver.git"
 	CACHE STRING
-	"Location of drake-iiwa-driver repo including kuka-fri sources")
+  "Location of drake-iiwa-driver repo including kuka-fri sources")
   set(IIWA_DRIVER_GIT_TAG
-	"19e20aa"
+    "5359b2d22f398982145c910086a15562a3b8751a"
 	CACHE STRING
 	"Build tag of drake-iiwa-driver repo")
 
@@ -158,6 +158,7 @@ if (WITH_IIWA_DRIVER)
     CMAKE_CACHE_ARGS
       -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
       -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+      -DCMAKE_MODULE_PATH:STRING=${source_dir}/drake/cmake/modules
     DEPENDS drake
   )
 
