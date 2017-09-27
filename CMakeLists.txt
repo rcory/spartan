@@ -236,7 +236,7 @@ if (WITH_IIWA_DRIVER)
 	CACHE STRING
   "Location of drake-iiwa-driver repo including kuka-fri sources")
   set(IIWA_DRIVER_GIT_TAG
-    "5359b2d22f398982145c910086a15562a3b8751a"
+    "285acdb92426a8f793599a1dbe920ea0fe154ca0"
 	CACHE STRING
 	"Build tag of drake-iiwa-driver repo")
 
