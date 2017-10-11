@@ -179,9 +179,20 @@ ExternalProject_Add(signal-scope
   DEPENDS director
 )
 
+
+
 ExternalProject_Add(ContactParticleFilter
   SOURCE_DIR ${source_dir}/src/ContactParticleFilter
   BINARY_DIR ${build_dir}/ContactParticleFilter
+  BUILD_ALWAYS 1
+  CMAKE_CACHE_ARGS
+    ${CMAKE_ARGS_FOR_EXTERNALS}
+  DEPENDS drake
+)
+
+ExternalProject_Add(DepthSim
+  SOURCE_DIR ${source_dir}/src/DepthSim
+  BINARY_DIR ${build_dir}/DepthSim
   BUILD_ALWAYS 1
   CMAKE_CACHE_ARGS
     ${CMAKE_ARGS_FOR_EXTERNALS}

@@ -1,1 +1,1 @@
-../../build/install/bin/drake-visualizer --script  myPanel.py
+../../build/install/bin/drake-visualizer --script  groundTruthAnnotaionPanel.py

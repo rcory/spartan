@@ -362,5 +362,5 @@ class WidgetDict(object):
 if __name__ == '__main__':
     print "starting ground truth panel"
     myWidget = GroundTruthAnnotation()
-    myWidget.addURDFModel("/home/drc/spartan/apps/chris/cube.urdf")
+    myWidget.addURDFModel("/home/drc/Chris/spartan/apps/chris/cube.urdf")
     myWidget.widget.show()
