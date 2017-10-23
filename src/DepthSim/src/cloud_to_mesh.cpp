@@ -60,6 +60,7 @@ main (int argc, char** argv)
   std::vector<int> states = gp3.getPointStates();
 
   pcl::io::saveVTKFile ("/home/drc/Chris/mesh.vtk", triangles);
+  
   // Finish
   return (0);
 }

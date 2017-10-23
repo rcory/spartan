@@ -15,6 +15,6 @@ link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 
-add_executable(demo cloud_to_mesh.cpp)
+add_executable(demo cloud_to_mesh_poisson.cpp)
 target_link_libraries(demo drake::drake ${VTK_LIBRARIES} ${PCL_LIBRARIES})
 install(TARGETS demo DESTINATION bin)
