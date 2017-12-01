@@ -19,3 +19,6 @@
 [submodule "src/catkin_projects/drake-schunk-driver"]
 	path = src/catkin_projects/drake-schunk-driver
 	url = git@github.com:RobotLocomotion/drake-schunk-driver.git
+[submodule "src/catkin_projects/drake_ros_systems"]
+	path = src/catkin_projects/drake_ros_systems
+	url = git@github.com:gizatt/drake_ros_systems
