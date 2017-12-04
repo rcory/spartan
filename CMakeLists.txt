@@ -24,13 +24,17 @@ endif()
 option(WITH_PERCEPTION "Build with perception libraries and tools." ON)
 option(WITH_SNOPT "Build drake with support for the SNOPT solver." OFF)
 
+# Intended to install the SAME version as Drake uses internally.
+# However, the SHAs are currently not synced (I don't know how to
+# write that kind of bazel query).
+option(WITH_BULLET3 "Build a complete version of Bullet, and install pybullet support." OFF)
+
 option(WITH_IIWA_DRIVER_RLG "Build drake-iiwa-driver, RLG version." OFF)
 option(WITH_IIWA_DRIVER_TRI "Build drake-iiwa-driver, TRI version." OFF)
 option(WITH_SCHUNK_DRIVER "Build drake-schunk-driver." OFF)
 option(WITH_ROS "Build the catkin-workspace projects." OFF)
 option(WITH_REACHABILITY_ANALYZER "Build a reachability analyzer (better with snopt)" OFF)
 option(WITH_TRIMESH "Build trimesh, a python utility for working with triangle meshes" OFF)
-
 
 # Setup external projects
 include(ExternalProject)
@@ -230,6 +234,35 @@ if (WITH_REACHABILITY_ANALYZER)
     ${CMAKE_ARGS_FOR_EXTERNALS}
   DEPENDS drake director RemoteTreeViewer common_utils
   )
+endif()
+
+if (WITH_BULLET3)
+  set(BULLET3_GIT_REPOSITORY
+  "git@github.com:bulletphysics/bullet3.git"
+  CACHE STRING
+  "Location of bullet3 repo.")
+
+  # This should be the same as the bullet
+  # version used in Drake -- see
+  # spartan/drake/WORKSPACE
+  set(BULLET3_GIT_TAG "2.86.1")
+
+  # Extra arguments lifted from bullet install helper:
+  # https://github.com/bulletphysics/bullet3/blob/master/build_cmake_pybullet_double.sh
+  ExternalProject_Add(bullet3
+    SOURCE_DIR ${build_dir}/externals/bullet3
+    BINARY_DIR ${build_dir}/bullet3
+    GIT_REPOSITORY "${BULLET3_GIT_REPOSITORY}"
+    GIT_TAG "${BULLET3_GIT_TAG}"
+    BUILD_ALWAYS 1
+    CMAKE_CACHE_ARGS
+      ${CMAKE_ARGS_FOR_EXTERNALS}
+      -DBUILD_PYBULLET:BOOL=ON
+      -DBUILD_PYBULLET_NUMPY:BOOL=OFF
+      -DUSE_DOUBLE_PRECISION:BOOL=ON
+    INSTALL_COMMAND make install && mkdir -p ${CMAKE_INSTALL_PREFIX}/lib/python2.7/site-packages/ && ${CP} ${build_dir}/bullet3/examples/pybullet/pybullet.so ${CMAKE_INSTALL_PREFIX}/lib/python2.7/site-packages
+  )
+
 endif()
 
 if (WITH_TRIMESH)
