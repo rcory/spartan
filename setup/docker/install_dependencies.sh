@@ -16,7 +16,8 @@ apt install --no-install-recommends \
   apt-utils \
   usbutils \
   dialog \
-  python-pip
+  python-pip \
+  libav-tools
 
 pip install -U pip setuptools
 
