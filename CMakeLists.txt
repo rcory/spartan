@@ -121,12 +121,12 @@ ExternalProject_Add(drake
 # Ubuntu 14.04: Drake downloads a precompiled version of VTK compiled with Qt4
 # Ubuntu 16.04: Drake downloads a precompiled version of VTK compiled with Qt5
 # Otherwise, assume Qt5
-set(USED_QTVERSION 5)
+set(USED_QTVERSION 4)
 if(APPLE)
   # VTK version used by drake
-  set(VTK_INSTALL_DIR /usr/local/opt/vtk@8.0)
+  set(VTK_INSTALL_DIR /usr/local/opt/vtk7)
   set(VTK_ARGS
-    -DVTK_DIR:PATH=${VTK_INSTALL_DIR}/lib/cmake/vtk-8.0
+    -DVTK_DIR:PATH=${VTK_INSTALL_DIR}/lib/cmake/vtk-7.1
     -DPYTHON_CONFIG_EXECUTABLE:FILEPATH=/usr/local/bin/python2.7-config
   )
   set(QT_ARGS -DQt5_DIR:PATH=/usr/local/opt/qt/lib/cmake/Qt5)
@@ -182,26 +182,26 @@ ExternalProject_Add(common_utils
     ${CMAKE_ARGS_FOR_EXTERNALS}
 )
 
-ExternalProject_Add(signal-scope
-  SOURCE_DIR ${source_dir}/signal-scope
-  BINARY_DIR ${build_dir}/signal-scope
-  BUILD_ALWAYS 1
-  CMAKE_CACHE_ARGS
-    ${python_args}
-    -DUSED_QTVERSION:STRING=${USED_QTVERSION}
-    ${QT_ARGS}
-    ${CMAKE_ARGS_FOR_EXTERNALS}
-  DEPENDS director
-)
+#ExternalProject_Add(signal-scope
+#  SOURCE_DIR ${source_dir}/signal-scope
+#  BINARY_DIR ${build_dir}/signal-scope
+#  BUILD_ALWAYS 1
+#  CMAKE_CACHE_ARGS
+#    ${python_args}
+#    -DUSED_QTVERSION:STRING=${USED_QTVERSION}
+#    ${QT_ARGS}
+#    ${CMAKE_ARGS_FOR_EXTERNALS}
+#  DEPENDS director
+#)
 
-ExternalProject_Add(ContactParticleFilter
-  SOURCE_DIR ${source_dir}/src/ContactParticleFilter
-  BINARY_DIR ${build_dir}/ContactParticleFilter
-  BUILD_ALWAYS 1
-  CMAKE_CACHE_ARGS
-    ${CMAKE_ARGS_FOR_EXTERNALS}
-  DEPENDS drake
-)
+#ExternalProject_Add(ContactParticleFilter
+#  SOURCE_DIR ${source_dir}/src/ContactParticleFilter
+#  BINARY_DIR ${build_dir}/ContactParticleFilter
+#  BUILD_ALWAYS 1
+#  CMAKE_CACHE_ARGS
+#    ${CMAKE_ARGS_FOR_EXTERNALS}
+#  DEPENDS drake
+#)
 
 ExternalProject_Add(spartan_lcmtypes
   SOURCE_DIR ${source_dir}/spartan_lcmtypes

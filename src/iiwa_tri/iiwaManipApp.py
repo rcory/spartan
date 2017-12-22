@@ -10,7 +10,8 @@ from director import transformUtils
 from director import robotsystem
 from director import segmentation
 from director import cameraview
-from director import pydrakeik
+sys.path.append("/Users/rickcory/dev/drake/bindings/python")
+#from director import pydrakeik
 from director import packagepath
 from director import roboturdf
 from director import robotlinkselector
@@ -27,12 +28,12 @@ except ImportError:
     useOptitrackVisualizer = False
 
 
-from big_optitrackvisualizer import BigOptitrackVisualizer
+#from big_optitrackvisualizer import BigOptitrackVisualizer
 
 import PythonQt
 from PythonQt import QtCore, QtGui
 
-
+sys.path.append("/Users/rickcory/dev/drake/bazel-bin/tools/drake_visualizer.runfiles/drake/lcmtypes")
 import drake as lcmdrake
 import bot_core as lcmbotcore
 
@@ -250,14 +251,14 @@ def setRobotPoseFromOptitrack(robotToBodyOffset=[0.0, -0.035, 0.0, -90, -90.5, 0
 
 packageMap = packagepath.PackageMap()
 packageMap.populateFromSearchPaths(os.path.join(os.environ['SPARTAN_SOURCE_DIR'], 'models'))
-roboturdf.addPathsFromPackageMap(packageMap)
+#roboturdf.addPathsFromPackageMap(packageMap)
 
 robotSystem = makeRobotSystem(view)
 
 # TODO: move this to director/robotsystem.py as optional feature
-if useOptitrackVisualizer:
+#if useOptitrackVisualizer:
     #optitrackVis = OptitrackVisualizer('OPTITRACK_FRAMES')
-    optitrackVis = BigOptitrackVisualizer('OPTITRACK_FRAMES')
+#   optitrackVis = BigOptitrackVisualizer('OPTITRACK_FRAMES')
     #optitrackVis.setEnabled(True)
     #applogic.MenuActionToggleHelper('Tools', optitrackVis.name, optitrackVis.isEnabled, optitrackVis.setEnabled)
 
@@ -274,7 +275,7 @@ robotLinkSelector = robotlinkselector.RobotLinkSelector()
 viewBehaviors.addHandler(viewBehaviors.LEFT_DOUBLE_CLICK_EVENT, robotLinkSelector.onLeftDoubleClick)
 
 
-if True:
+if False:
     # sammy's hackery lives here
     from iiwa_wsg_task_panel import IiwaWsgTaskPanel
     taskPanel = IiwaWsgTaskPanel(robotSystem, optitrackVis)
